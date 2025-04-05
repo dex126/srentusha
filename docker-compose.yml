@@ -1,0 +1,32 @@
+networks:
+  srentusha:
+    name: srentusha_network
+
+volumes:
+  srentusha-data:
+
+services:
+  mongodb:
+    container_name: srentusha_mongo
+    hostname: srentusha_mongo
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - srentusha
+
+  srentusha:
+    depends_on:
+      - mongodb
+    container_name: srentusha_bot
+    hostname: srentusha
+    image: srentusha_bot:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - SR_MONGO_CONNECTION_STRING=mongodb://srentusha_mongo:27017
+    build:
+      context: .
+    networks:
+      - srentusha
