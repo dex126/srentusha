@@ -57,9 +57,11 @@ class ScheduleRouter(Router):
 
     async def parse_schedule_message(self, schedules: dict, user_group: str) -> str:
         today_date = datetime.strptime(
-            f"{datetime.today().date()}",  # noqa: DTZ002
+            f"{datetime.now().date()}",
             "%Y-%m-%d",
         ).strftime("%d-%m-%Y")
+
+        minimum_applied_hour = 8
 
         schedule_text = (
             f"<b>Расписание для {user_group}:"
@@ -76,7 +78,7 @@ class ScheduleRouter(Router):
                 timestamp_end=schedules[classroom]["end"],
             )
 
-            if schedule_time[0].hour < 8:  # noqa: PLR2004
+            if schedule_time[0].hour < minimum_applied_hour:
                 time = (
                     f"{schedule_time[0].minute:d}:{schedule_time[0].second:02d}-"
                     f"{schedule_time[1].minute:d}:{schedule_time[1].second:02d}"
