@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.filters.callback_data import CallbackData
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-inallowed_group_ids = [320, 282, 323, 297, 328]
+inallowed_group_ids = [320, 282, 323, 297, 328]  # move this to settings
 
 
 class GroupButtonCallbackInfo(CallbackData, prefix="group_button_content"):
