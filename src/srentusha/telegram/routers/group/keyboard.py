@@ -46,7 +46,7 @@ def build_groups_keyboard(
     index: int,
 ) -> types.InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
-    group_list = list(groups)[:24] if index == 1 else list(groups)[23:]
+    group_list = list(groups)[:24] if index == 1 else list(groups)[24:]
 
     for group_title in group_list:
         if groups[group_title] not in inallowed_group_ids:
